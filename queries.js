@@ -5,11 +5,13 @@ var options = {
 };
 
 var pgp = require('pg-promise')(options);
-var connectionString = 'postgres://localhost:5432/iot';
-var db = pgp(connectionString);
+var offlineString = 'postgres://localhost:5432/iot';
+var bluemixString = 'postgres://ycmgimuh:GjtczE5znkcFfwzZW29qNM7xALCUsIgn@jumbo.db.elephantsql.com:5432/ycmgimuh';
+var db = pgp(bluemixString);
 
 
 // Query functions
+
 
 //Get all data
 function getAllData(req, res, next) {
@@ -64,7 +66,7 @@ function createData(req,res,next){
 //Update data
 function updateData(req,res,next){
     db.none('update group_1 set value=$1, time_stamp=now() where id=$2',
-    [req.body.value,parseInt(req.params.id)])
+        [req.body.value,parseInt(req.params.id)])
     .then(function() {
         res.status(200)
         .json({
