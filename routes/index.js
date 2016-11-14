@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/api/group_1', db.getAllData);
-router.get('/api/group_1',db.getDataWithType);
+router.get('/api/group_1/:sensor_name',db.getDataWithType);
 router.post('/api/group_1/post', db.createData);
 router.put('/api/group_1/update/:id', db.updateData);
 //router.get('/api/group_1/delete/:id',db.getSingleData);
