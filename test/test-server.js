@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 describe('models',function(){
     it('should list ALL data on /api/group_1 GET' , function(done){
         chai.request(server)
-        .get('api/group_1')
+        .get('/api/group_1')
         .end(function(err, res){
           res.should.have.status(200);
           res.should.be.json;
