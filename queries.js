@@ -5,8 +5,8 @@ var options = {
 };
 
 var pgp = require('pg-promise')(options);
-var offlineString = 'postgres://localhost:5432/iot';
-var bluemixString = 'postgres://ycmgimuh:GjtczE5znkcFfwzZW29qNM7xALCUsIgn@jumbo.db.elephantsql.com:5432/ycmgimuh';
+var bluemixString = 'postgres://localhost:5432/iot';
+//var bluemixString = 'postgres://ycmgimuh:GjtczE5znkcFfwzZW29qNM7xALCUsIgn@jumbo.db.elephantsql.com:5432/ycmgimuh';
 var db = pgp(bluemixString);
 
 
@@ -29,22 +29,23 @@ function getAllData(req, res, next) {
   });
 }
 
-//Get a single record
-function getSingleData(req,res,next){
-    var id = parseInt(req.params.id);
-    db.one('select * from group_1 where id = $1',id)
+//Get list of records with provided sensor name
+function getDataWithType(req,res,next){
+    db.any('select * from group_1 where sensor_name = $1',req.body.sensor_name)
     .then(function (data) {
       res.status(200)
       .json({
           status: 'success',
           data: data,
-          message: 'Retrieved a single record'
+          message: 'Retrieved list of recroors'
       });
   })
     .catch(function (err) {
       return next(err);
   });
 }
+
+
 
 //Post data
 function createData(req,res,next){
@@ -82,7 +83,7 @@ function updateData(req,res,next){
 module.exports = {
   getAllData: getAllData,
   createData: createData,
-  getSingleData: getSingleData,
-  updateData: updateData
+  updateData: updateData,
+  getDataWithType: getDataWithType
 };
 
