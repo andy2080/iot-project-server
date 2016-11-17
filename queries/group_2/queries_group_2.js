@@ -1,11 +1,11 @@
-var db = require('./db_setup');
-
-
+var db = require('../db_setup');
 
 // Query functions
+
+
 //Get all data
 function getAllData(req, res, next) {
-  db.any('select * from group_1')
+  db.any('select * from group_2')
   .then(function (data) {
       res.status(200)
       .json({
@@ -22,7 +22,7 @@ function getAllData(req, res, next) {
 //Get list of records with provided sensor name
 function getDataWithType(req,res,next){
     var sensor = req.params.sensor_name;
-    db.any('select * from group_1 where sensor_name = $1',[sensor])
+    db.any('select * from group_2 where sensor_name = $1',[sensor])
     .then(function (data) {
       res.status(200)
       .json({
@@ -41,7 +41,7 @@ function getDataWithType(req,res,next){
 //Post data
 function createData(req,res,next){
 
-    db.none('insert into group_1(value,sensor_name,time_stamp)' +
+    db.none('insert into group_2(value,sensor_name,time_stamp)' +
         'values(${value},${sensor_name},now())',
         req.body)
     .then(function() {
