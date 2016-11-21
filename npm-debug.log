@@ -9,7 +9,7 @@
 6 silly lifecycle iot-project@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle iot-project@0.0.0~start: iot-project@0.0.0
 8 verbose lifecycle iot-project@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle iot-project@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/nguyenluong/iot-project/node_modules/.bin:/usr/local/Cellar/node/6.6.0/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/Users/nguyenluong/anaconda/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/smlnj/bin
+9 verbose lifecycle iot-project@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/nguyenluong/iot-project/node_modules/.bin:/usr/local/Cellar/node/6.6.0/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/Users/nguyenluong/anaconda/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/smlnj/bin:/Users/nguyenluong/databene-benerator-0.9.8/bin
 10 verbose lifecycle iot-project@0.0.0~start: CWD: /Users/nguyenluong/iot-project
 11 silly lifecycle iot-project@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle iot-project@0.0.0~start: Returned: code: 1  signal: null

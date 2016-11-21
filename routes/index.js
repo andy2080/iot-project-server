@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var db_1 = require('../queries/queries_group_1'),
- db_2 = require('../queries/queries_group_2');
+var db_1 = require('../queries/group_1/queries_group_1'),
+ db_2 = require('../queries/group_2/queries_group_2');
 
 var jwt = require('express-jwt'),
     teamValidation = require('../authentication/validate');
