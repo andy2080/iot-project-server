@@ -5,7 +5,7 @@ var db = require('../db_setup');
 // Query functions
 //Get all data
 function getAllData(req, res, next) {
-  db.any('select * from group_0')
+  db.any('select * from demo')
   .then(function (data) {
       res.status(200)
       .json({
@@ -22,7 +22,7 @@ function getAllData(req, res, next) {
 //Get list of records with provided sensor name
 function getDataWithType(req,res,next){
     var sensor = req.params.sensor_name;
-    db.any('select * from group_0 where sensor_name = $1',[sensor])
+    db.any('select * from demo where sensor_name = $1',[sensor])
     .then(function (data) {
       res.status(200)
       .json({
@@ -41,8 +41,8 @@ function getDataWithType(req,res,next){
 //Post data
 function createData(req,res,next){
 
-    db.none('insert into group_0(value,sensor_name,time_stamp)' +
-        'values(${value},${sensor_name},now())',
+    db.none('insert into demo(value,sensor_name)' +
+        'values(${value},${sensor_name})',
         req.body)
     .then(function() {
         res.status(200)
@@ -58,7 +58,7 @@ function createData(req,res,next){
 
 //Update data
 function updateData(req,res,next){
-    db.none('update group_0 set value=$1, time_stamp=now() where id=$2',
+    db.none('update demo set value=$1, time_stamp=now() where id=$2',
         [req.body.value,parseInt(req.params.id)])
     .then(function() {
         res.status(200)
