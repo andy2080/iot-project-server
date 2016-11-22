@@ -14,10 +14,10 @@ router.get('/', function(req, res, next) {
 var jwtValidation = jwt({secret: 'iot-project-metropolia'});
 
 //Chain middleware
-router.get('/api/demo', jwtValidation , teamValidation.validateDemo ,demo.getAllData);
-router.get('/api/demo/:sensor_name',jwtValidation , teamValidation.validateDemo ,demo.getDataWithType);
-router.post('/api/demo/post',jwtValidation , teamValidation.validateDemo , demo.createData);
-router.put('/api/demo/update/:id',jwtValidation , teamValidation.validateDemo , demo.updateData);
+router.get('/api/demo', jwtValidation , teamValidation.validateDemo ,demo_query.getAllData);
+router.get('/api/demo/:sensor_name',jwtValidation , teamValidation.validateDemo ,demo_query.getDataWithType);
+router.post('/api/demo/post',jwtValidation , teamValidation.validateDemo , demo_query.createData);
+router.put('/api/demo/update/:id',jwtValidation , teamValidation.validateDemo , demo_query.updateData);
 
 //Validate token -> validate valid group -> execute query
 router.get('/api/group_1', jwtValidation , teamValidation.validateGroupOne ,db_1.getAllData);
