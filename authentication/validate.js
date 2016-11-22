@@ -25,6 +25,7 @@ var validateGroupThree = function(req,res,next){
 }
 
 module.exports = {
+    validateDemo: validateDemo,
     validateGroupOne: validateGroupOne,
     validateGroupTwo: validateGroupTwo,
     validateGroupThree: validateGroupThree
