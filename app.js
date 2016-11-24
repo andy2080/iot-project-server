@@ -40,7 +40,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({status: err.status});
+  //res.render('error');
 });
 
 //development error handler

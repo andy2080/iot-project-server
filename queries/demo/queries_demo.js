@@ -48,7 +48,7 @@ function createData(req,res,next){
         res.status(200)
         .json({
             status: 'success',
-            message: "Inserted into database"
+            message: "Record created"
         });
     })
     .catch(function (err){
