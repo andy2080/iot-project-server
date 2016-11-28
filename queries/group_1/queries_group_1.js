@@ -41,8 +41,8 @@ function getDataWithType(req,res,next){
 //Post data
 function createData(req,res,next){
 
-    db.none('insert into group_1(value,sensor_name,time_stamp)' +
-        'values(${value},${sensor_name},now())',
+    db.none('insert into group_1(imu,magnetic,gps,heart_rate)' +
+        'values(${imu},${magnetic},${gps},${heart_rate})',
         req.body)
     .then(function() {
         res.status(200)
@@ -75,7 +75,7 @@ function updateData(req,res,next){
 module.exports = {
   getAllData: getAllData,
   createData: createData,
-  updateData: updateData,
+  //updateData: updateData,
   getDataWithType: getDataWithType
 };
 

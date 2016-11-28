@@ -21,9 +21,9 @@ router.put('/api/demo/:id',jwtValidation , teamValidation.validateDemo , demo_qu
 
 //Validate token -> validate valid group -> execute query
 router.get('/api/group_1', jwtValidation , teamValidation.validateGroupOne ,db_1.getAllData);
-router.get('/api/group_1/:sensor_name',jwtValidation , teamValidation.validateGroupOne ,db_1.getDataWithType);
-router.post('/api/group_1/post',jwtValidation , teamValidation.validateGroupOne , db_1.createData);
-router.put('/api/group_1/update/:id',jwtValidation , teamValidation.validateGroupOne , db_1.updateData);
+//router.get('/api/group_1/:sensor_name',jwtValidation , teamValidation.validateGroupOne ,db_1.getDataWithType);
+router.post('/api/group_1',jwtValidation , teamValidation.validateGroupOne , db_1.createData);
+//router.put('/api/group_1/update/:id',jwtValidation , teamValidation.validateGroupOne , db_1.updateData);
 
 
 module.exports = router;
