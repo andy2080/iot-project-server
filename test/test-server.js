@@ -2,19 +2,23 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../app');
 var should = chai.should();
-var keys = require('../queries/auth_keys');
-var demoRecord = require('./mock-data')
+
+var demoRecord = require('./mock-data').DemoRecord;
+var demoRecordGroup1 = require('./mock-data').DemoRecordGroup1;
+var demoRecordGroup9 = require('./mock-data').DemoRecordGroup9;
 
 
 chai.use(chaiHttp);
 var dict = []; // create an empty array
 var header = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiREVNTyIsImFkbWluIjp0cnVlfQ.xa-_nKy-UscyAcKfzv123Fle05fkQHiH_CGmCDw-CzU'};
+var header_group_1 = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiR1JPVVBfMSIsImFkbWluIjp0cnVlfQ.eKvUFe2OdsnZUfee8Xoi_vHixDOzs2rchkIFaegHE4E'};
+var header_group_9 = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiR1JPVVBfOSJ9.Gp73S7NH1sMEW494cObPiC_cu60w1ASqDFzG35GL5bo'};
 dict.push({
-    key:   "Authorization",
-    value: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiREVNTyIsImFkbWluIjp0cnVlfQ.xa-_nKy-UscyAcKfzv123Fle05fkQHiH_CGmCDw-CzU"
+  key:   "Authorization",
+  value: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiREVNTyIsImFkbWluIjp0cnVlfQ.xa-_nKy-UscyAcKfzv123Fle05fkQHiH_CGmCDw-CzU"
 });
 
-describe('queries',function(){
+describe('queries demo',function(){
   //GET ALL
   it('should list ALL data on /api/demo GET' , function(done){
     chai.request(server)
@@ -87,4 +91,49 @@ describe('queries',function(){
 
 
 
+});
+
+describe('queries group 1  ',function(){
+//Test for group 1
+it('should success insert /api/group_1 POST.', function(done){
+
+  var fakeData = new demoRecordGroup1(3.423,2.34,34.3,3.34,5.34,52.3,43.4,23.3,434.2);
+  chai.request(server)
+  .post('/api/group_1')
+  .set(header_group_1)
+  .send(fakeData)
+  .end(function(err,res){
+    console.log(err)
+    res.should.have.status(200);
+    res.should.be.json;
+    done();
+  })
+});
+
+
+it('should return correct sensor value /api/group_1 GET.', function(done){
+
+  chai.request(server)
+  .get('/api/group_1/acc')
+  .set(header_group_1)
+  .end(function(err,res){
+    res.should.have.status(200);
+    res.should.be.json;
+    done();
+  })
+});
+});
+
+describe('queries group 9 ', function(){
+  it('should return everything /api/group_9 GET.', function(done){
+    var fakeData = new demoRecordGroup9(false,2.3,4.3,2.5);
+    chai.request(server)
+    .get('/api/group_9')
+    .set(header_group_9)
+    .end(function(err,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    })
+  });
 });

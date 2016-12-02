@@ -1,11 +1,15 @@
 var db = require('../db_setup');
 
-// Query functions
 
-
-//Get all data
+/**
+ * Get all records
+ * @param  {[type]}   req  request
+ * @param  {[type]}   res  result
+ * @param  {Function} next chain function
+ * @return {[type]}        All records from table
+ */
 function getAllData(req, res, next) {
-  db.any('select * from group_2')
+  db.any('select * from group_9')
   .then(function (data) {
       res.status(200)
       .json({
@@ -19,10 +23,17 @@ function getAllData(req, res, next) {
   });
 }
 
-//Get list of records with provided sensor name
+
+/**
+ * [getDataWithType description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
 function getDataWithType(req,res,next){
     var sensor = req.params.sensor_name;
-    db.any('select * from group_2 where sensor_name = $1',[sensor])
+    db.any('select * from group_9 where sensor_name = $1',[sensor])
     .then(function (data) {
       res.status(200)
       .json({
@@ -41,7 +52,7 @@ function getDataWithType(req,res,next){
 //Post data
 function createData(req,res,next){
 
-    db.none('insert into group_2(value,sensor_name,time_stamp)' +
+    db.none('insert into group_9(value,sensor_name,time_stamp)' +
         'values(${value},${sensor_name},now())',
         req.body)
     .then(function() {
@@ -73,9 +84,9 @@ function updateData(req,res,next){
 }
 
 module.exports = {
-  getAllData: getAllData,
-  createData: createData,
+  getAllData: getAllData
+  /*createData: createData,
   updateData: updateData,
-  getDataWithType: getDataWithType
+  getDataWithType: getDataWithType*/
 };
 

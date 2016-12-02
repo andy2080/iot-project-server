@@ -2,8 +2,13 @@ var db = require('../db_setup');
 
 
 
-// Query functions
-//Get all data
+/**
+ * [getAllData description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
 function getAllData(req, res, next) {
   db.any('select * from demo')
   .then(function (data) {
@@ -19,7 +24,13 @@ function getAllData(req, res, next) {
   });
 }
 
-//Get list of records with provided sensor name
+/**
+ * [getDataWithType description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
 function getDataWithType(req,res,next){
     var sensor = req.params.sensor_name;
     db.any('select * from demo where sensor_name = $1',[sensor])
@@ -38,7 +49,13 @@ function getDataWithType(req,res,next){
 
 
 
-//Post data
+/**
+ * [createData description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
 function createData(req,res,next){
 
     db.none('insert into demo(value,sensor_name)' +
@@ -56,7 +73,13 @@ function createData(req,res,next){
     });
 }
 
-//Update data
+/**
+ * [updateData description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
 function updateData(req,res,next){
     db.none('update demo set value=$1, time_stamp=now() where id=$2',
         [req.body.value,parseInt(req.params.id)])

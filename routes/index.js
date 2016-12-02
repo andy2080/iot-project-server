@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db_1 = require('../queries/group_1/queries_group_1'),
- db_2 = require('../queries/group_2/queries_group_2'),
+ db_9 = require('../queries/group_9/queries_group_9'),
  demo_query = require('../queries/demo/queries_demo');
 
 var jwt = require('express-jwt'),
@@ -21,9 +21,10 @@ router.put('/api/demo/:id',jwtValidation , teamValidation.validateDemo , demo_qu
 
 //Validate token -> validate valid group -> execute query
 router.get('/api/group_1', jwtValidation , teamValidation.validateGroupOne ,db_1.getAllData);
-//router.get('/api/group_1/:sensor_name',jwtValidation , teamValidation.validateGroupOne ,db_1.getDataWithType);
+router.get('/api/group_1/:sensor_name',jwtValidation , teamValidation.validateGroupOne ,db_1.getDataWithType);
 router.post('/api/group_1',jwtValidation , teamValidation.validateGroupOne , db_1.createData);
 //router.put('/api/group_1/update/:id',jwtValidation , teamValidation.validateGroupOne , db_1.updateData);
 
+//router.get('/api/group_9', jwtValidation , teamValidation.validateGroupNine ,db_9.getAllData);
 
 module.exports = router;
