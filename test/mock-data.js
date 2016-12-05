@@ -21,9 +21,9 @@ function DemoRecordGroup1(x_acc,y_acc,z_acc,x_mag,y_mag,z_mag,x_gyr,y_gyr,z_gyr)
     this.z_mag = z_mag;
 }
 
-function DemoRecordGroup9(door,temp,light,humidity){
+function DemoRecordGroup9(door,temperature,light,humidity){
     this.door = door;
-    this.temp = temp;
+    this.temperature = temperature;
     this.light = light;
     this.humidity = humidity;
 }
