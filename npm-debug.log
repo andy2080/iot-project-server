@@ -1,15 +1,15 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/Cellar/node/6.6.0/bin/node',
+1 verbose cli [ '/usr/local/Cellar/node/7.1.0/bin/node',
 1 verbose cli   '/usr/local/bin/npm',
 1 verbose cli   'start' ]
-2 info using npm@3.10.7
-3 info using node@v6.6.0
+2 info using npm@3.10.9
+3 info using node@v7.1.0
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle iot-project@0.0.0~prestart: iot-project@0.0.0
 6 silly lifecycle iot-project@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle iot-project@0.0.0~start: iot-project@0.0.0
 8 verbose lifecycle iot-project@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle iot-project@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/nguyenluong/iot-project/node_modules/.bin:/usr/local/Cellar/node/6.6.0/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/Users/nguyenluong/anaconda/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/smlnj/bin:/Users/nguyenluong/databene-benerator-0.9.8/bin
+9 verbose lifecycle iot-project@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/nguyenluong/iot-project/node_modules/.bin:/usr/local/Cellar/node/7.1.0/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/Users/nguyenluong/anaconda/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/smlnj/bin:/Users/nguyenluong/databene-benerator-0.9.8/bin
 10 verbose lifecycle iot-project@0.0.0~start: CWD: /Users/nguyenluong/iot-project
 11 silly lifecycle iot-project@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle iot-project@0.0.0~start: Returned: code: 1  signal: null
@@ -22,14 +22,14 @@
 14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:40:14)
 14 verbose stack     at emitTwo (events.js:106:13)
 14 verbose stack     at ChildProcess.emit (events.js:191:7)
-14 verbose stack     at maybeClose (internal/child_process.js:877:16)
+14 verbose stack     at maybeClose (internal/child_process.js:885:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
 15 verbose pkgid iot-project@0.0.0
 16 verbose cwd /Users/nguyenluong/iot-project
 17 error Darwin 15.6.0
-18 error argv "/usr/local/Cellar/node/6.6.0/bin/node" "/usr/local/bin/npm" "start"
-19 error node v6.6.0
-20 error npm  v3.10.7
+18 error argv "/usr/local/Cellar/node/7.1.0/bin/node" "/usr/local/bin/npm" "start"
+19 error node v7.1.0
+20 error npm  v3.10.9
 21 error code ELIFECYCLE
 22 error iot-project@0.0.0 start: `node ./bin/www`
 22 error Exit status 1

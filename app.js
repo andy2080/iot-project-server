@@ -66,4 +66,13 @@ app.use(function(err, req, res, next) {
     message: err.message
   });
 });
+
+//Allow cross domains
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+};
+
+
+app.use(allowCrossDomain);
+
 module.exports = app;
