@@ -110,7 +110,7 @@ function updateData(req,res,next){
  * @return {[type]}        [description]
  */
 function registerUser(req,res,next){
-  db.none('insert into user_group_1(username,password) values($1,$2)',
+  db.none('insert into user_group_1(username,password) values($1,$2);',
     [req.body.username,req.body.password])
   .then(function() {
     res.status(200)
