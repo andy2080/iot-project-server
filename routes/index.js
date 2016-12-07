@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db_1 = require('../queries/group_1/queries_group_1'),
  db_9 = require('../queries/group_9/queries_group_9'),
+ db_14 = require('../queries/group_14/queries_group_14'),
  db_18 = require('../queries/group_18/queries_group_18'),
  demo_query = require('../queries/demo/queries_demo');
 
@@ -30,6 +31,11 @@ router.post('/api/group_1/login',jwtValidation , teamValidation.validateGroupOne
 //Router for group 9
 router.get('/api/group_9', jwtValidation , teamValidation.validateGroupNine ,db_9.getAllData);
 router.post('/api/group_9', jwtValidation , teamValidation.validateGroupNine ,db_9.createData);
+
+//Router for group 14
+router.get('/api/group_14', jwtValidation , teamValidation.validateGroupFourteen ,db_14.getAllData);
+router.get('/api/group_14/:sensor_name',jwtValidation , teamValidation.validateGroupFourteen ,db_14.getDataWithType);
+router.post('/api/group_14', jwtValidation , teamValidation.validateGroupFourteen ,db_14.createData);
 
 //Router for group 18
 router.get('/api/group_18', jwtValidation , teamValidation.validateGroupEighteen ,db_18.getAllData);

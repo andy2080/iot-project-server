@@ -42,7 +42,7 @@ it('should return correct sensor value /api/group_1 GET.', function(done){
 });
 
 it('should success register user /api/group_1/register POST.', function(done){
-  var fakeUser = {username: 'nguyen', password: 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'};
+  var fakeUser = {username: 'lnk', password: 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'};
   chai.request(server)
   .post('/api/group_1/register')
   .set(header_group_1)
