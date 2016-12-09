@@ -82,6 +82,74 @@ function createData(req,res,next){
 }
 
 /**
+ * [getDataByDeviceId description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
+function getDataByDeviceId(req,res,next){
+  db.any('select d.* , g.timestamp from data_group_1 d, group_1 g where d.device_id=$1 and d.data_id = g.id;'
+    ,[req.body.device_id])
+  .then(function(data) {
+    res.status(200)
+    .json({
+
+      data: data,
+
+    });
+  })
+  .catch(function (err){
+    return next(err);
+  });
+}
+
+/**
+ * [getDataByUserId description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
+function getDataByUserId(req,res,next){
+  db.any('select d.* , g.timestamp from data_group_1 d, group_1 g where g.user_id=$1 and d.data_id = g.id;'
+    ,[req.body.user_id])
+  .then(function(data) {
+    res.status(200)
+    .json({
+
+      data: data,
+
+    });
+  })
+  .catch(function (err){
+    return next(err);
+  });
+}
+
+/**
+ * [getDataByDeviceIdAndUserId description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
+function getDataByDeviceIdAndUserId(req,res,next){
+  db.any('select d.* , g.timestamp from data_group_1 d, group_1 g where d.device_id=$1 and g.user_id=$2 and d.data_id = g.id;'
+    ,[req.body.device_id,req.body.user_id])
+  .then(function(data) {
+    res.status(200)
+    .json({
+      data: data
+    });
+  })
+  .catch(function (err){
+    return next(err);
+  });
+}
+
+
+/**
  * [createUsableData description]
  * @param  {[type]}   req  [description]
  * @param  {[type]}   res  [description]
@@ -206,6 +274,9 @@ module.exports = {
   registerUser: registerUser,
   loginDevice: loginDevice,
   registerDevice: registerDevice,
-  createUsableData: createUsableData
+  createUsableData: createUsableData,
+  getDataByUserId: getDataByUserId,
+  getDataByDeviceId: getDataByDeviceId,
+  getDataByDeviceIdAndUserId: getDataByDeviceIdAndUserId
 };
 

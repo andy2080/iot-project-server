@@ -21,7 +21,7 @@ it('should success insert /api/group_1 POST.', function(done){
   .set(header_group_1)
   .send(fakeData)
   .end(function(err,res){
-    console.log(err)
+
     res.should.have.status(200);
     res.should.be.json;
     done();
@@ -62,7 +62,7 @@ it('should success login user /api/group_1/login post.', function(done){
   .set(header_group_1)
   .send(fakeUser)
   .end(function(err,res){
-    console.log(res.body)
+
     res.should.have.status(200);
     res.should.be.json;
     done();
@@ -76,12 +76,58 @@ it('should success post data user /api/group_1/data post.', function(done){
   .set(header_group_1)
   .send(fakeUser)
   .end(function(err,res){
-    console.log(err);
+
     res.should.have.status(200);
     res.should.be.json;
     done();
   })
 });
+
+
+it('should success get data by device /api/group_1/data get.', function(done){
+var fakeData = {device_id:'1411'};
+  chai.request(server)
+  .get('/api/group_1/data/device')
+  .set(header_group_1)
+  .send(fakeData)
+  .end(function(err,res){
+
+    res.should.have.status(200);
+    res.should.be.json;
+    done();
+  })
+
 });
 
-;
+it('should success get data by user id /api/group_1/data/user get.', function(done){
+  var fakeData = {user_id:'1'};
+  chai.request(server)
+  .get('/api/group_1/data/user')
+  .set(header_group_1)
+  .send(fakeData)
+  .end(function(err,res){
+
+    res.should.have.status(200);
+    res.should.be.json;
+    done();
+  })
+});
+
+
+it('should success get data by user and device id /api/group_1/data get.', function(done){
+  var fakeData = {user_id:1, device_id:'1411'};
+  chai.request(server)
+  .get('/api/group_1/data/unify')
+  .set(header_group_1)
+  .send(fakeData)
+  .end(function(err,res){
+    console.log(res.body);
+    res.should.have.status(200);
+    res.should.be.json;
+    done();
+  })
+});
+
+});
+
+

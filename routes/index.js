@@ -33,6 +33,9 @@ router.post('/api/group_1/login',jwtValidation , teamValidation.validateGroupOne
 router.post('/api/group_1/data',jwtValidation , teamValidation.validateGroupOne , db_1.createUsableData);
 router.post('/api/group_1/device/login',jwtValidation , teamValidation.validateGroupOne , db_1.loginDevice);
 router.post('/api/group_1/device/register',jwtValidation , teamValidation.validateGroupOne , db_1.registerDevice);
+router.get('/api/group_1/data/device',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByDeviceId);
+router.get('/api/group_1/data/user',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByUserId);
+router.get('/api/group_1/data/unify',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByDeviceIdAndUserId);
 
 //Router for group 4
 router.get('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.getAllData);
