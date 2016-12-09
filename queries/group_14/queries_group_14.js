@@ -58,7 +58,7 @@ function getDataWithType(req,res,next){
  */
 function createData(req,res,next){
 
-    db.none('insert into demo(value,sensor_name)' +
+    db.none('insert into group_14(value,sensor_name)' +
         'values(${value},${sensor_name})',
         req.body)
     .then(function() {

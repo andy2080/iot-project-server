@@ -80,27 +80,7 @@ function createData(req,res,next){
   });
 }
 
-/**
- * [updateData description]
- * @param  {[type]}   req  [description]
- * @param  {[type]}   res  [description]
- * @param  {Function} next [description]
- * @return {[type]}        [description]
- */
-function updateData(req,res,next){
-  db.none('update group_1 set value=$1, time_stamp=now() where id=$2',
-    [req.body.value,parseInt(req.params.id)])
-  .then(function() {
-    res.status(200)
-    .json({
-      status: 'success',
-      message: "Inserted into database"
-    });
-  })
-  .catch(function (err){
-    return next(err);
-  });
-}
+
 
 /**
  * [registerUser description]
@@ -151,7 +131,6 @@ function loginUser(req,res,next){
 module.exports = {
   getAllData: getAllData,
   createData: createData,
-  //updateData: updateData,
   getDataWithType: getDataWithType,
   loginUser: loginUser,
   registerUser: registerUser

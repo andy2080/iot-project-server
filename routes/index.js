@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var db_1 = require('../queries/group_1/queries_group_1'),
+db_4 = require('../queries/group_4/queries_group_4'),
+db_6 = require('../queries/group_6/queries_group_6'),
  db_9 = require('../queries/group_9/queries_group_9'),
  db_14 = require('../queries/group_14/queries_group_14'),
  db_18 = require('../queries/group_18/queries_group_18'),
+ db_20 = require('../queries/group_20/queries_group_20'),
  demo_query = require('../queries/demo/queries_demo');
 
 var jwt = require('express-jwt'),
@@ -28,6 +31,15 @@ router.post('/api/group_1',jwtValidation , teamValidation.validateGroupOne , db_
 router.post('/api/group_1/register',jwtValidation , teamValidation.validateGroupOne , db_1.registerUser);
 router.post('/api/group_1/login',jwtValidation , teamValidation.validateGroupOne , db_1.loginUser);
 
+//Router for group 4
+router.get('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.getAllData);
+router.post('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.createData);
+
+//Router for group 6
+router.get('/api/group_6', jwtValidation , teamValidation.validateGroupSix ,db_6.getAllData);
+router.post('/api/group_6', jwtValidation , teamValidation.validateGroupSix ,db_6.createData);
+router.get('/api/group_6/:sensor_name',jwtValidation , teamValidation.validateGroupSix ,db_6.getDataWithType);
+
 //Router for group 9
 router.get('/api/group_9', jwtValidation , teamValidation.validateGroupNine ,db_9.getAllData);
 router.post('/api/group_9', jwtValidation , teamValidation.validateGroupNine ,db_9.createData);
@@ -41,4 +53,8 @@ router.post('/api/group_14', jwtValidation , teamValidation.validateGroupFourtee
 router.get('/api/group_18', jwtValidation , teamValidation.validateGroupEighteen ,db_18.getAllData);
 router.post('/api/group_18', jwtValidation , teamValidation.validateGroupEighteen ,db_18.createData);
 
+//Router for group 20
+router.get('/api/group_20', jwtValidation , teamValidation.validateGroupTwenty ,db_20.getAllData);
+router.get('/api/group_20/:sensor_name',jwtValidation , teamValidation.validateGroupTwenty ,db_20.getDataWithType);
+router.post('/api/group_20', jwtValidation , teamValidation.validateGroupTwenty ,db_20.createData);
 module.exports = router;

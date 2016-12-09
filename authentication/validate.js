@@ -24,6 +24,18 @@ var validateGroupThree = function(req,res,next){
     next();
 }
 
+var validateGroupFour = function(req,res,next){
+
+    if (req.user.name != "GROUP_4") return res.sendStatus(401);
+    next();
+}
+
+var validateGroupSix = function(req,res,next){
+
+    if (req.user.name != "GROUP_6") return res.sendStatus(401);
+    next();
+}
+
 var validateGroupNine = function(req,res,next){
 
     if (req.user.name != "GROUP_9") return res.sendStatus(401);
@@ -42,12 +54,21 @@ var validateGroupEighteen = function(req,res,next){
     next();
 }
 
+var validateGroupTwenty = function(req,res,next){
+
+    if (req.user.name != "GROUP_20") return res.sendStatus(401);
+    next();
+}
+
 module.exports = {
     validateDemo: validateDemo,
     validateGroupOne: validateGroupOne,
     validateGroupTwo: validateGroupTwo,
     validateGroupThree: validateGroupThree,
+    validateGroupFour: validateGroupFour,
+    validateGroupSix: validateGroupSix,
     validateGroupNine: validateGroupNine,
     validateGroupFourteen: validateGroupFourteen,
-    validateGroupEighteen: validateGroupEighteen
+    validateGroupEighteen: validateGroupEighteen,
+    validateGroupTwenty: validateGroupTwenty
 }
