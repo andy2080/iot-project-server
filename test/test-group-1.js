@@ -68,6 +68,20 @@ it('should success login user /api/group_1/login post.', function(done){
     done();
   })
 });
+
+it('should success post data user /api/group_1/data post.', function(done){
+  var fakeUser = {pitch: 23.3, roll: 2.3,lat:60.234234, lon:21.24234, velocity: 23.4,device_id: 1411,user_id:1};
+  chai.request(server)
+  .post('/api/group_1/data')
+  .set(header_group_1)
+  .send(fakeUser)
+  .end(function(err,res){
+    console.log(err);
+    res.should.have.status(200);
+    res.should.be.json;
+    done();
+  })
+});
 });
 
 ;

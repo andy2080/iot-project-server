@@ -49,7 +49,8 @@ function getDataWithType(req,res,next){
 
 
 /**
- * [createData description]
+ * Create data from gps sensor
+ * Use for testing only
  * @param  {[type]}   req  [description]
  * @param  {[type]}   res  [description]
  * @param  {Function} next [description]
@@ -80,7 +81,76 @@ function createData(req,res,next){
   });
 }
 
+/**
+ * [createUsableData description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
+function createUsableData(req,res,next){
 
+  db.none('insert into group_1(user_id,device_id) values($7,$6);'
+    +'insert into data_group_1(pitch,roll,lat,lon,velocity,device_id,data_id) values($1,$2,$3,$4,$5,$6,lastval());',
+  [req.body.pitch,req.body.roll, req.body.lat,req.body.lon
+  ,req.body.velocity,req.body.device_id,req.body.user_id])
+  .then(function() {
+    res.status(200)
+    .json({
+      status: 'success',
+      message: "Inserted into database"
+    });
+  })
+  .catch(function (err){
+    return next(err);
+  });
+}
+
+/**
+ * [registerUser description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
+function registerDevice(req,res,next){
+  db.none('insert into device_group_1(device_id,password) values($1,$2);',
+    [req.body.device_id,req.body.password])
+  .then(function() {
+    res.status(200)
+    .json({
+      status: 'success',
+      message: "Inserted into user database"
+    });
+  })
+  .catch(function (err){
+    err.status = 400;
+    return next(err);
+  });
+}
+
+/**
+ * [loginUser description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
+function loginDevice(req,res,next){
+  db.one('select * from device_group_1 where device_id = $1 and password = $2;',
+    [req.body.device_id, req.body.password])
+  .then(function(data){
+    res.status(200).json({
+      status: "Login success",
+      user: data
+    });
+  })
+  .catch(function(err){
+    err.code = 400;
+    err.message = "Can't find user";
+    return next(err);
+  })
+}
 
 /**
  * [registerUser description]
@@ -133,6 +203,9 @@ module.exports = {
   createData: createData,
   getDataWithType: getDataWithType,
   loginUser: loginUser,
-  registerUser: registerUser
+  registerUser: registerUser,
+  loginDevice: loginDevice,
+  registerDevice: registerDevice,
+  createUsableData: createUsableData
 };
 

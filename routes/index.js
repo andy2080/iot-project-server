@@ -30,6 +30,9 @@ router.get('/api/group_1/:sensor_name',jwtValidation , teamValidation.validateGr
 router.post('/api/group_1',jwtValidation , teamValidation.validateGroupOne , db_1.createData);
 router.post('/api/group_1/register',jwtValidation , teamValidation.validateGroupOne , db_1.registerUser);
 router.post('/api/group_1/login',jwtValidation , teamValidation.validateGroupOne , db_1.loginUser);
+router.post('/api/group_1/data',jwtValidation , teamValidation.validateGroupOne , db_1.createUsableData);
+router.post('/api/group_1/device/login',jwtValidation , teamValidation.validateGroupOne , db_1.loginDevice);
+router.post('/api/group_1/device/register',jwtValidation , teamValidation.validateGroupOne , db_1.registerDevice);
 
 //Router for group 4
 router.get('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.getAllData);
