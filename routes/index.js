@@ -26,16 +26,18 @@ router.put('/api/demo/:id',jwtValidation , teamValidation.validateDemo , demo_qu
 
 //Validate token -> validate group -> execute query
 router.get('/api/group_1', jwtValidation , teamValidation.validateGroupOne ,db_1.getAllData);
-router.get('/api/group_1/:sensor_name',jwtValidation , teamValidation.validateGroupOne ,db_1.getDataWithType);
+router.get('/api/group_1/gps/:sensor_name',jwtValidation , teamValidation.validateGroupOne ,db_1.getDataWithType);
 router.post('/api/group_1',jwtValidation , teamValidation.validateGroupOne , db_1.createData);
 router.post('/api/group_1/register',jwtValidation , teamValidation.validateGroupOne , db_1.registerUser);
 router.post('/api/group_1/login',jwtValidation , teamValidation.validateGroupOne , db_1.loginUser);
 router.post('/api/group_1/data',jwtValidation , teamValidation.validateGroupOne , db_1.createUsableData);
-router.post('/api/group_1/device/login',jwtValidation , teamValidation.validateGroupOne , db_1.loginDevice);
-router.post('/api/group_1/device/register',jwtValidation , teamValidation.validateGroupOne , db_1.registerDevice);
+
 router.get('/api/group_1/data/device',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByDeviceId);
 router.get('/api/group_1/data/user',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByUserId);
 router.get('/api/group_1/data/unify',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByDeviceIdAndUserId);
+
+router.get('/api/group_1/magnetic/:mac',jwtValidation , teamValidation.validateGroupOne , db_1.getMagneticRecordByMAC);
+router.post('/api/group_1/magnetic',jwtValidation , teamValidation.validateGroupOne , db_1.createMagneticRecord);
 
 //Router for group 4
 router.get('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.getAllData);

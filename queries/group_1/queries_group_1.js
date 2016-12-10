@@ -266,6 +266,34 @@ function loginUser(req,res,next){
   })
 }
 
+function createMagneticRecord(req,res,next){
+
+  db.none('insert into mag_switch_group_1 (MAC,rpm) values($1,$2);',
+    [req.body.mac,req.body.rpm])
+  .then(function() {
+    res.status(200)
+    .json({
+      status: 'success',
+    });
+  })
+  .catch(function (err){
+    return next(err);
+  });
+}
+
+function getMagneticRecordByMAC(req,res,next){
+  var mac = req.params.mac
+  db.any('select * from mag_switch_group_1 where MAC=$1;',[mac])
+  .then(function(data) {
+    res.status(200)
+    .json({
+      data: data
+    });
+  })
+  .catch(function (err){
+    return next(err);
+  });
+}
 module.exports = {
   getAllData: getAllData,
   createData: createData,
@@ -277,6 +305,8 @@ module.exports = {
   createUsableData: createUsableData,
   getDataByUserId: getDataByUserId,
   getDataByDeviceId: getDataByDeviceId,
-  getDataByDeviceIdAndUserId: getDataByDeviceIdAndUserId
+  getDataByDeviceIdAndUserId: getDataByDeviceIdAndUserId,
+  createMagneticRecord: createMagneticRecord,
+  getMagneticRecordByMAC: getMagneticRecordByMAC
 };
 

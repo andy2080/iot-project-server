@@ -128,6 +128,34 @@ it('should success get data by user and device id /api/group_1/data get.', funct
   })
 });
 
+it('should success insert mag data /api/group_1/magnetic post.', function(done){
+  var fakeData = {mac:'1411fa', rpm:32.3};
+  chai.request(server)
+  .post('/api/group_1/magnetic')
+  .set(header_group_1)
+  .send(fakeData)
+  .end(function(err,res){
+    console.log(res.body);
+    res.should.have.status(200);
+    res.should.be.json;
+    done();
+  })
+});
+
+it('should success queyr mag data by mac /api/group_1/magnetic get.', function(done){
+
+  chai.request(server)
+  .get('/api/group_1/magnetic')
+  .query({mac: '1411fa'})
+  .set(header_group_1)
+  .end(function(err,res){
+    console.log(res.body);
+    res.should.have.status(200);
+    res.should.be.json;
+    done();
+  })
+});
+
 });
 
 
