@@ -89,8 +89,9 @@ function createData(req,res,next){
  * @return {[type]}        [description]
  */
 function getDataByDeviceId(req,res,next){
+  var device_id = req.params.device_id;
   db.any('select d.* , g.timestamp from data_group_1 d, group_1 g where d.device_id=$1 and d.data_id = g.id;'
-    ,[req.body.device_id])
+    ,[device_id])
   .then(function(data) {
     res.status(200)
     .json({

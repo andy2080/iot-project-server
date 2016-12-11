@@ -142,7 +142,7 @@ it('should success insert mag data /api/group_1/magnetic post.', function(done){
   })
 });
 
-it('should success queyr mag data by mac /api/group_1/magnetic get.', function(done){
+it('should success queyry mag data by mac /api/group_1/magnetic get.', function(done){
 
   chai.request(server)
   .get('/api/group_1/magnetic')

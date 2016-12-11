@@ -25,14 +25,24 @@ router.post('/api/demo',jwtValidation , teamValidation.validateDemo , demo_query
 router.put('/api/demo/:id',jwtValidation , teamValidation.validateDemo , demo_query.updateData);
 
 //Validate token -> validate group -> execute query
+
+/**
+ *
+ */
+
+//Get all data
 router.get('/api/group_1', jwtValidation , teamValidation.validateGroupOne ,db_1.getAllData);
+
+//Get data by sensor
 router.get('/api/group_1/gps/:sensor_name',jwtValidation , teamValidation.validateGroupOne ,db_1.getDataWithType);
+
+
 router.post('/api/group_1',jwtValidation , teamValidation.validateGroupOne , db_1.createData);
 router.post('/api/group_1/register',jwtValidation , teamValidation.validateGroupOne , db_1.registerUser);
 router.post('/api/group_1/login',jwtValidation , teamValidation.validateGroupOne , db_1.loginUser);
 router.post('/api/group_1/data',jwtValidation , teamValidation.validateGroupOne , db_1.createUsableData);
 
-router.get('/api/group_1/data/device',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByDeviceId);
+router.get('/api/group_1/data/device/:device_id',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByDeviceId);
 router.get('/api/group_1/data/user',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByUserId);
 router.get('/api/group_1/data/unify',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByDeviceIdAndUserId);
 
