@@ -157,12 +157,13 @@ function getDataByDeviceIdAndUserId(req,res,next){
  * @param  {Function} next [description]
  * @return {[type]}        [description]
  */
-function createUsableData(req,res,next){
+function createGPSData(req,res,next){
 
-  db.none('insert into group_1(user_id,device_id) values($7,$6);'
+  db.none(
+    'insert into group_1(user_id,device_id,type) values($7,$6,$8);'
     +'insert into data_group_1(pitch,roll,lat,lon,velocity,device_id,data_id) values($1,$2,$3,$4,$5,$6,lastval());',
   [req.body.pitch,req.body.roll, req.body.lat,req.body.lon
-  ,req.body.velocity,req.body.device_id,req.body.user_id])
+  ,req.body.velocity,req.body.device_id,req.body.user_id, 'gps'])
   .then(function() {
     res.status(200)
     .json({
@@ -269,8 +270,9 @@ function loginUser(req,res,next){
 
 function createMagneticRecord(req,res,next){
 
-  db.none('insert into mag_switch_group_1 (MAC,rpm) values($1,$2);',
-    [req.body.mac,req.body.rpm])
+  db.none('insert into group_1(user_id,device_id,type) values($1,$2,$3);'
+    +'insert into mag_switch_group_1 (device_id,rpm,data_id) values($2,$4,lastval());',
+    [req.body.user_id,req.body.mac,'mag',req.body.rpm])
   .then(function() {
     res.status(200)
     .json({
@@ -303,7 +305,7 @@ module.exports = {
   registerUser: registerUser,
   loginDevice: loginDevice,
   registerDevice: registerDevice,
-  createUsableData: createUsableData,
+  createGPSData: createGPSData,
   getDataByUserId: getDataByUserId,
   getDataByDeviceId: getDataByDeviceId,
   getDataByDeviceIdAndUserId: getDataByDeviceIdAndUserId,
