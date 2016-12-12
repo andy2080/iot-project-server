@@ -15,8 +15,7 @@ function getAllData(req, res, next) {
       res.status(200)
       .json({
           status: 'success',
-          data: data,
-          message: 'Retrieved ALL data'
+          data: data
       });
   })
   .catch(function (err) {
@@ -33,13 +32,12 @@ function getAllData(req, res, next) {
  */
 function getDataWithType(req,res,next){
     var sensor = req.params.sensor_name;
-    db.any('select * from group_6 where sensor_name = $1',[sensor])
+    db.any('select timestamp, $1 from group_6;',[sensor])
     .then(function (data) {
       res.status(200)
       .json({
           status: 'success',
-          data: data,
-          message: 'Retrieved list of records'
+          data: data
       });
   })
     .catch(function (err) {
@@ -58,14 +56,13 @@ function getDataWithType(req,res,next){
  */
 function createData(req,res,next){
 
-    db.none('insert into group_6(value,sensor_name)' +
-        'values(${value},${sensor_name})',
+    db.none('insert into group_6(soil,humidity,temperature)' +
+        'values(${soil},${humidity},${temperature})',
         req.body)
     .then(function() {
         res.status(200)
         .json({
-            status: 'success',
-            message: "Record created"
+            status: 'success'
         });
     })
     .catch(function (err){
