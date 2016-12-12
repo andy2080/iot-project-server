@@ -64,8 +64,7 @@ function createData(req,res,next){
     .then(function() {
         res.status(200)
         .json({
-            status: 'success',
-            message: "Inserted into database"
+            status: 'success'
         });
     })
     .catch(function (err){
