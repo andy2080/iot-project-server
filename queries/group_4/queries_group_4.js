@@ -49,9 +49,52 @@ function createData(req,res,next){
     });
 }
 
+/**
+ * [createData description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
+function deleteAllData(req,res,next){
+
+    db.none('delete from group_4;')
+    .then(function() {
+        res.status(200)
+        .json({
+            status: 'success'
+        });
+    })
+    .catch(function (err){
+        return next(err);
+    });
+}
+
+/**
+ * [getAllData description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
+function getLastData(req, res, next) {
+  db.any('select * from group_4 order by timestamp desc limit 1;')
+  .then(function (data) {
+      res.status(200)
+      .json({
+          status: 'success',
+          data: data
+      });
+  })
+  .catch(function (err) {
+      return next(err);
+  });
+}
 
 module.exports = {
   getAllData: getAllData,
-  createData: createData
+  createData: createData,
+  deleteAllData: deleteAllData,
+  getLastData: getLastData
 };
 

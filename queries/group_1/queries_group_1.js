@@ -56,24 +56,24 @@ function getDataWithType(req,res,next){
  * @param  {Function} next [description]
  * @return {[type]}        [description]
  */
-function createData(req,res,next){
+function createIMUData(req,res,next){
   var body_acc = {x:req.body.x_acc, y:req.body.y_acc, z:req.body.z_acc};
   var body_gyr = {x:req.body.x_gyr, y:req.body.y_gyr, z:req.body.z_gyr};
   var body_mag = {x:req.body.x_mag, y:req.body.y_mag, z:req.body.z_mag};
   var user_id = req.body.user_id;
-  db.none('insert into group_1 (user_id) values($10);' +
-    'insert into sensor_group_1 (id,x,y,z,type) values(lastval(),$1,$2,$3,\'acc\');' +
-    'insert into sensor_group_1 (id,x,y,z,type) values(lastval(),$4,$5,$6,\'gyr\');'+
-    'insert into sensor_group_1 (id,x,y,z,type) values(lastval(),$7,$8,$9,\'mag\');',
+  var device_id = req.body.device_id;
+  db.none('insert into group_1 (user_id,device_id,type) values($10,$11,$12);' +
+    'insert into sensor_group_1 (data_id,x,y,z,type,device_id) values(lastval(),$1,$2,$3,\'acc\',$11);' +
+    'insert into sensor_group_1 (data_id,x,y,z,type, device_id) values(lastval(),$4,$5,$6,\'gyr\',$11);'+
+    'insert into sensor_group_1 (data_id,x,y,z,type, device_id) values(lastval(),$7,$8,$9,\'mag\',$11);',
     [body_acc.x,body_acc.y,body_acc.z,
     body_gyr.x,body_gyr.y,body_gyr.z,
     body_mag.x,body_mag.y,body_mag.z,
-    user_id])
+    user_id,device_id,'imu'])
   .then(function() {
     res.status(200)
     .json({
-      status: 'success',
-      message: "Inserted into database"
+      status: 'success'
     });
   })
   .catch(function (err){
@@ -81,6 +81,30 @@ function createData(req,res,next){
   });
 }
 
+
+/**
+ * [getDataByDeviceId description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
+function getIMUDataByDeviceId(req,res,next){
+  var device_id = req.params.device_id;
+  db.any('select d.* , g.timestamp from sensor_group_1 d, group_1 g where d.device_id=$1 and d.data_id = g.id;'
+    ,[device_id])
+  .then(function(data) {
+    res.status(200)
+    .json({
+
+      data: data,
+
+    });
+  })
+  .catch(function (err){
+    return next(err);
+  });
+}
 /**
  * [getDataByDeviceId description]
  * @param  {[type]}   req  [description]
@@ -161,9 +185,9 @@ function createGPSData(req,res,next){
 
   db.none(
     'insert into group_1(user_id,device_id,type) values($7,$6,$8);'
-    +'insert into data_group_1(pitch,roll,lat,lon,velocity,device_id,data_id) values($1,$2,$3,$4,$5,$6,lastval());',
+    +'insert into data_group_1(pitch,roll,lat,lon,velocity,yaw,device_id,data_id) values($1,$2,$3,$4,$5,$9,$6,lastval());',
   [req.body.pitch,req.body.roll, req.body.lat,req.body.lon
-  ,req.body.velocity,req.body.device_id,req.body.user_id, 'gps'])
+  ,req.body.velocity,req.body.device_id,req.body.user_id, 'gps',req.body.yaw])
   .then(function() {
     res.status(200)
     .json({
@@ -189,8 +213,7 @@ function registerDevice(req,res,next){
   .then(function() {
     res.status(200)
     .json({
-      status: 'success',
-      message: "Inserted into user database"
+      status: 'success'
     });
   })
   .catch(function (err){
@@ -299,7 +322,8 @@ function getMagneticRecordByMAC(req,res,next){
 }
 module.exports = {
   getAllData: getAllData,
-  createData: createData,
+  createIMUData: createIMUData,
+  getIMUDataByDeviceId: getIMUDataByDeviceId,
   getDataWithType: getDataWithType,
   loginUser: loginUser,
   registerUser: registerUser,

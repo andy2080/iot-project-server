@@ -36,8 +36,9 @@ router.get('/api/group_1', jwtValidation , teamValidation.validateGroupOne ,db_1
 //Get data by sensor
 router.get('/api/group_1/gps/:sensor_name',jwtValidation , teamValidation.validateGroupOne ,db_1.getDataWithType);
 
+router.get('/api/group_1/imu/device/:device_id',jwtValidation , teamValidation.validateGroupOne , db_1.getIMUDataByDeviceId);
+router.post('/api/group_1/imu',jwtValidation , teamValidation.validateGroupOne , db_1.createIMUData);
 
-router.post('/api/group_1',jwtValidation , teamValidation.validateGroupOne , db_1.createData);
 router.post('/api/group_1/register',jwtValidation , teamValidation.validateGroupOne , db_1.registerUser);
 router.post('/api/group_1/login',jwtValidation , teamValidation.validateGroupOne , db_1.loginUser);
 
@@ -50,13 +51,16 @@ router.get('/api/group_1/magnetic/:mac',jwtValidation , teamValidation.validateG
 router.post('/api/group_1/magnetic',jwtValidation , teamValidation.validateGroupOne , db_1.createMagneticRecord);
 
 //Router for group 4
-router.get('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.getAllData);
+router.get('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.getLastData);
+router.get('/api/group_4/last', jwtValidation , teamValidation.validateGroupFour ,db_4.getLastData);
 router.post('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.createData);
+router.delete('/api/group_4/delete/everything/because/i/want/to',jwtValidation , teamValidation.validateGroupFour ,db_4.deleteAllData);
 
 //Router for group 6
 router.get('/api/group_6', jwtValidation , teamValidation.validateGroupSix ,db_6.getAllData);
 router.post('/api/group_6', jwtValidation , teamValidation.validateGroupSix ,db_6.createData);
 router.get('/api/group_6/:sensor_name',jwtValidation , teamValidation.validateGroupSix ,db_6.getDataWithType);
+
 
 //Router for group 9
 router.get('/api/group_9', jwtValidation , teamValidation.validateGroupNine ,db_9.getAllData);

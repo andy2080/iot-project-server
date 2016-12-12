@@ -71,6 +71,8 @@ function createData(req,res,next){
 }
 
 
+
+
 module.exports = {
   getAllData: getAllData,
   createData: createData,
