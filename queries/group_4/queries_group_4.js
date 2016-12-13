@@ -91,10 +91,49 @@ function getLastData(req, res, next) {
   });
 }
 
+/**
+ * [getAllData description]
+ * @param  {[type]}   req  [description]
+ * @param  {[type]}   res  [description]
+ * @param  {Function} next [description]
+ * @return {[type]}        [description]
+ */
+function getGoogleChartData(req, res, next) {
+  db.any(' select * from group_4 where timestamp >= \'2016-12-10\'::date and timestamp <= \'2016-12-13\'::date order by timestamp limit 10;')
+  .then(function (data) {
+    var mappedData = data.map(function(obj){
+      var doorValue = obj.door == true ? 50 : null;
+      var o1 = {'v': doorValue};
+      var o2 = {'v': obj.temperature};
+      var o3 = {'v': obj.humidity};
+      var o4 = {'v': obj.timestamp};
+      console.log(obj.timestamp);
+      return {'c':[o1,o2,o3,o4]}
+    });
+
+      res.status(200)
+      .json({
+          status: 'success',
+          data: {
+                cols: [{id: 'time', label: 'Time', type: 'string'},
+                       {id: 'door', label: 'Door', type: 'number'},
+                       {id: 'humidity', label: 'Humidity', type: 'number'},
+                       {id: 'temperature', label: 'Temperature', type: 'number'}],
+                rows: mappedData
+                }
+      });
+  })
+  .catch(function (err) {
+      return next(err);
+  });
+}
+
+
 module.exports = {
   getAllData: getAllData,
   createData: createData,
   deleteAllData: deleteAllData,
-  getLastData: getLastData
+  getLastData: getLastData,
+  getGoogleChartData: getGoogleChartData
 };
 

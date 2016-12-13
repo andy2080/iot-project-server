@@ -55,7 +55,7 @@ router.get('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_
 router.get('/api/group_4/last', jwtValidation , teamValidation.validateGroupFour ,db_4.getLastData);
 router.post('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.createData);
 router.delete('/api/group_4/delete/everything/because/i/want/to',jwtValidation , teamValidation.validateGroupFour ,db_4.deleteAllData);
-
+router.get('/api/group_4/test',jwtValidation , teamValidation.validateGroupFour ,db_4.getGoogleChartData);
 //Router for group 6
 router.get('/api/group_6', jwtValidation , teamValidation.validateGroupSix ,db_6.getAllData);
 router.post('/api/group_6', jwtValidation , teamValidation.validateGroupSix ,db_6.createData);

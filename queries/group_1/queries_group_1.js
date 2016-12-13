@@ -69,7 +69,7 @@ function createIMUData(req,res,next){
     [body_acc.x,body_acc.y,body_acc.z,
     body_gyr.x,body_gyr.y,body_gyr.z,
     body_mag.x,body_mag.y,body_mag.z,
-    user_id,device_id,'imu'])
+    1,device_id,'imu'])
   .then(function() {
     res.status(200)
     .json({
