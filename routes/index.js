@@ -51,7 +51,7 @@ router.get('/api/group_1/magnetic/:mac',jwtValidation , teamValidation.validateG
 router.post('/api/group_1/magnetic',jwtValidation , teamValidation.validateGroupOne , db_1.createMagneticRecord);
 
 //Router for group 4
-router.get('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.getLastData);
+router.get('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.getAllData);
 router.get('/api/group_4/last', jwtValidation , teamValidation.validateGroupFour ,db_4.getLastData);
 router.post('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.createData);
 router.delete('/api/group_4/delete/everything/because/i/want/to',jwtValidation , teamValidation.validateGroupFour ,db_4.deleteAllData);
