@@ -99,15 +99,18 @@ function getLastData(req, res, next) {
  * @return {[type]}        [description]
  */
 function getGoogleChartData(req, res, next) {
-  db.any(' select * from group_4 where timestamp >= \'2016-12-10\'::date and timestamp <= \'2016-12-13\'::date order by timestamp limit 10;')
+  db.any(' select temperature,humidity,door,timestamp from group_4 where timestamp >= \'2016-12-10\'::date and timestamp <= \'2016-12-13\'::date order by timestamp limit 10;')
   .then(function (data) {
     var mappedData = data.map(function(obj){
       var doorValue = obj.door == true ? 50 : null;
+      //var modifiedTimestamp = new Date(obj.timestamp.replace(' ', 'T'));
       var o1 = {'v': doorValue};
       var o2 = {'v': obj.temperature};
       var o3 = {'v': obj.humidity};
-      var o4 = {'v': obj.timestamp};
-      console.log(obj.timestamp);
+
+      var dateForm = new Date(Date.parse(obj.timestamp)+1000);
+      var formattedDate = dateForm.getHours() + ':' + dateForm.getMinutes() + ':' + dateForm.getSeconds();
+      var o4 = {'v': formattedDate};
       return {'c':[o1,o2,o3,o4]}
     });
 

@@ -9,6 +9,8 @@ var db = require('../db_setup');
  * @param  {Function} next [description]
  * @return {[type]}        [description]
  */
+
+//change timestamp
 function getAllData(req, res, next) {
   db.any('select * from group_18')
   .then(function (data) {
