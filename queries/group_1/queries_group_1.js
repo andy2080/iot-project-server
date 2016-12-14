@@ -294,8 +294,8 @@ function loginUser(req,res,next){
 function createMagneticRecord(req,res,next){
 
   db.none('insert into group_1(user_id,device_id,type) values($1,$2,$3);'
-    +'insert into mag_switch_group_1 (device_id,rpm,data_id) values($2,$4,lastval());',
-    [1,req.body.mac,'mag',req.body.rpm])
+    +'insert into mag_switch_group_1 (device_id,rpm,hr,data_id) values($2,$4,$5,lastval());',
+    [1,req.body.mac,'mag',req.body.rpm,req.body.hr])
   .then(function() {
     res.status(200)
     .json({
