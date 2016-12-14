@@ -47,8 +47,9 @@ router.get('/api/group_1/gps/device/:device_id',jwtValidation , teamValidation.v
 router.get('/api/group_1/data/user',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByUserId);
 router.get('/api/group_1/data/unify',jwtValidation , teamValidation.validateGroupOne , db_1.getDataByDeviceIdAndUserId);
 
-router.get('/api/group_1/magnetic/:mac',jwtValidation , teamValidation.validateGroupOne , db_1.getMagneticRecordByMAC);
+router.get('/api/group_1/magnetic/device/:mac',jwtValidation , teamValidation.validateGroupOne , db_1.getMagneticRecordByMAC);
 router.post('/api/group_1/magnetic',jwtValidation , teamValidation.validateGroupOne , db_1.createMagneticRecord);
+
 
 //Router for group 4
 router.get('/api/group_4', jwtValidation , teamValidation.validateGroupFour ,db_4.getAllData);

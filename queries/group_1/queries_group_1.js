@@ -309,7 +309,7 @@ function createMagneticRecord(req,res,next){
 
 function getMagneticRecordByMAC(req,res,next){
   var mac = req.params.mac
-  db.any('select * from mag_switch_group_1 where MAC=$1;',[mac])
+  db.any('select * from mag_switch_group_1 where device_id=$1;',[mac])
   .then(function(data) {
     res.status(200)
     .json({
