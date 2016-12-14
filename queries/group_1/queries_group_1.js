@@ -187,7 +187,7 @@ function createGPSData(req,res,next){
     'insert into group_1(user_id,device_id,type) values($7,$6,$8);'
     +'insert into data_group_1(pitch,roll,lat,lon,velocity,yaw,device_id,data_id) values($1,$2,$3,$4,$5,$9,$6,lastval());',
   [req.body.pitch,req.body.roll, req.body.lat,req.body.lon
-  ,req.body.velocity,req.body.device_id,req.body.user_id, 'gps',req.body.yaw])
+  ,req.body.velocity,req.body.device_id,1, 'gps',req.body.yaw])
   .then(function() {
     res.status(200)
     .json({
@@ -295,7 +295,7 @@ function createMagneticRecord(req,res,next){
 
   db.none('insert into group_1(user_id,device_id,type) values($1,$2,$3);'
     +'insert into mag_switch_group_1 (device_id,rpm,data_id) values($2,$4,lastval());',
-    [req.body.user_id,req.body.mac,'mag',req.body.rpm])
+    [1,req.body.mac,'mag',req.body.rpm])
   .then(function() {
     res.status(200)
     .json({
